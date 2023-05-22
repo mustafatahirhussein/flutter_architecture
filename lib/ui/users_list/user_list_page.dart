@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture/user_list_cubit.dart';
-import 'package:flutter_architecture/users_list_state.dart';
-import 'package:flutter_architecture/widgets/user_card.dart';
+import 'package:flutter_architecture/ui/users_list/user_list_cubit.dart';
+import 'package:flutter_architecture/ui/users_list/users_list_state.dart';
+import 'package:flutter_architecture/ui/widgets/user_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserListPage extends StatefulWidget {
@@ -21,11 +21,9 @@ class _UserListPageState extends State<UserListPage> {
         builder: (context, state) {
           final userState = state as UsersListState;
 
-          return Center(
-            child: state.isLoading ? const CircularProgressIndicator() : ListView(
-              shrinkWrap: true,
-              children: userState.users.map((users) => UserCard(users: users)).toList(),
-            ),
+          return state.isLoading ? const Center(child: CircularProgressIndicator()) : ListView(
+            shrinkWrap: true,
+            children: userState.users.map((users) => UserCard(users: users)).toList(),
           );
         }
       ),

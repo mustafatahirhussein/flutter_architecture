@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture/user_json.dart';
+import 'package:flutter_architecture/domain/entities/user.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({Key? key, required this.users}) : super(key: key);
 
-  final UserJson users;
+  final User users;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -18,10 +18,10 @@ class UserCard extends StatelessWidget {
           Text(users.phone),
           Text(users.website),
 
-          SizedBox(
+          const SizedBox(
             height: 3,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );
