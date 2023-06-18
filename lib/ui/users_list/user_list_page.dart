@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture/ui/user_details/user_detail_page.dart';
-import 'package:flutter_architecture/ui/user_details/user_details_initial_params.dart';
 import 'package:flutter_architecture/ui/users_list/user_list_cubit.dart';
 import 'package:flutter_architecture/ui/users_list/users_list_initial_params.dart';
 import 'package:flutter_architecture/ui/users_list/users_list_state.dart';
@@ -16,12 +14,22 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
+  late UsersListCubit cubit;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit = BlocProvider.of<UsersListCubit>(context);
+    cubit.navigator.context = context;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: BlocBuilder(
-        bloc: BlocProvider.of<UsersListCubit>(context),
+        bloc: cubit,
         builder: (context, state) {
           final userState = state as UsersListState;
 
@@ -33,7 +41,7 @@ class _UserListPageState extends State<UserListPage> {
 
           return state.isLoading ? const Center(child: CircularProgressIndicator()) : ListView(
             shrinkWrap: true,
-            children: userState.users.map((users) => UserCard(users: users, onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDetailsPage(initialParams: UserDetailsInitialParams(user: users)),),))).toList(),
+            children: userState.users.map((users) => UserCard(users: users, onTap: () => cubit.onTapUser(users))).toList(),
           );
         }
       ),
