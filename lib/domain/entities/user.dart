@@ -17,6 +17,8 @@ class User extends Equatable {
     required this.website,
   });
 
+  const User.empty() : id = 000, name = '', email = '', username = '', phone = '', website = '';
+
   @override
   // TODO: implement props
   List<Object?> get props => [

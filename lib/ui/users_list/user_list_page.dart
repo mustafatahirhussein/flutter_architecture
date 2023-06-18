@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_architecture/ui/user_details/user_detail_page.dart';
+import 'package:flutter_architecture/ui/user_details/user_details_initial_params.dart';
 import 'package:flutter_architecture/ui/users_list/user_list_cubit.dart';
+import 'package:flutter_architecture/ui/users_list/users_list_initial_params.dart';
 import 'package:flutter_architecture/ui/users_list/users_list_state.dart';
 import 'package:flutter_architecture/ui/widgets/user_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserListPage extends StatefulWidget {
-  const UserListPage({Key? key}) : super(key: key);
+  const UserListPage({Key? key, required this.initialParams,}) : super(key: key);
 
+  final UsersListInitialParams initialParams;
   @override
   State<UserListPage> createState() => _UserListPageState();
 }
@@ -29,7 +33,7 @@ class _UserListPageState extends State<UserListPage> {
 
           return state.isLoading ? const Center(child: CircularProgressIndicator()) : ListView(
             shrinkWrap: true,
-            children: userState.users.map((users) => UserCard(users: users)).toList(),
+            children: userState.users.map((users) => UserCard(users: users, onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDetailsPage(initialParams: UserDetailsInitialParams(user: users)),),))).toList(),
           );
         }
       ),

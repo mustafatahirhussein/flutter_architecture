@@ -7,7 +7,7 @@ class UsersListState {
 
   UsersListState({required this.users, required this.isLoading, this.error});
 
-  factory UsersListState.empty() => UsersListState(users: [], isLoading: false);
+  factory UsersListState.initial() => UsersListState(users: [], isLoading: false);
 
   UsersListState copyWith({List<User>? users, bool? isLoading, String? error}) =>  UsersListState(users: users ?? this.users, isLoading: isLoading ?? this.isLoading, error: error ?? this.error);
 }

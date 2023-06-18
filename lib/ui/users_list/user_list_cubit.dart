@@ -3,7 +3,7 @@ import 'package:flutter_architecture/ui/users_list/users_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsersListCubit extends Cubit<UsersListState> {
-  UsersListCubit(this.userRepository) : super(UsersListState.empty());
+  UsersListCubit(this.userRepository) : super(UsersListState.initial());
 
   final UserRepository userRepository;
 
