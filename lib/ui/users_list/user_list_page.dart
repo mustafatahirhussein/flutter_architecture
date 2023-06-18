@@ -21,6 +21,12 @@ class _UserListPageState extends State<UserListPage> {
         builder: (context, state) {
           final userState = state as UsersListState;
 
+          if(state.error != null) {
+            return Center(
+              child: Text(state.error!),
+            );
+          }
+
           return state.isLoading ? const Center(child: CircularProgressIndicator()) : ListView(
             shrinkWrap: true,
             children: userState.users.map((users) => UserCard(users: users)).toList(),

@@ -8,8 +8,8 @@ class UsersListCubit extends Cubit<UsersListState> {
   final UserRepository userRepository;
 
   Future<void> fetchUsers() async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, error: null));
     var users = await userRepository.getUsers();
-    emit(state.copyWith(users: users, isLoading: false));
+    users.fold((error) => emit(state.copyWith(error: error.error)), (user) => emit(state.copyWith(users: user, isLoading: false)));
   }
 }
